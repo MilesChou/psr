@@ -1,6 +1,6 @@
 <?php
 
-namespace MilesChou\Template;
+namespace MilesChou\PsrSupport;
 
 class Sample
 {

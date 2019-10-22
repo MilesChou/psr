@@ -2,11 +2,11 @@
 
 PHP_MAJOR_VERSION := $(shell php -r "echo PHP_MAJOR_VERSION;")
 
-.PHONY: clean clean-all check test analyse coverage
+.PHONY: clean clean-all check test coverage
 
 # ---------------------------------------------------------------------
 
-all: test analyse
+all: test
 
 clean:
 	rm -rf ./build
@@ -23,9 +23,6 @@ ifeq ($(PHP_MAJOR_VERSION), 7)
 else
 	php vendor/bin/phpunit
 endif
-
-analyse:
-	php vendor/bin/phpstan analyse src tests --level=max
 
 coverage: test
 	@if [ "`uname`" = "Darwin" ]; then open build/coverage/index.html; fi

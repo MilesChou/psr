@@ -1,19 +1,11 @@
-# Composer Template
+# PSR Support
 
 [![Build Status][travis-svg]][travis-link]
 [![Coverage Status][coveralls-svg]][coveralls-link]
-[![Use this template](https://img.shields.io/badge/GitHub-Use_this_template-green.svg)](https://github.com/MilesChou/composer-template/generate)
 
-The template for create Composer project.
+The support classes for PSR.
 
-Remember remove / modify following information:
-
-* [ ] Namespace in [`composer.json`](/composer.json) and files in [`src`](/src) / [`tests`](/tests) directories
-* [ ] Project name and description in [`composer.json`](/composer.json)
-* [ ] Travis CI setting in [`.travis.yml`](/.travis.yml)
-* [ ] The badges links and this checklist in [README.md](/README.md) file
-
-[travis-svg]: https://travis-ci.com/MilesChou/composer-template.svg?branch=master
-[travis-link]: https://travis-ci.com/MilesChou/composer-template
-[coveralls-svg]: https://coveralls.io/repos/github/MilesChou/composer-template/badge.svg?branch=master
-[coveralls-link]: https://coveralls.io/github/MilesChou/composer-template
+[travis-svg]: https://travis-ci.com/MilesChou/psr-support.svg?branch=master
+[travis-link]: https://travis-ci.com/MilesChou/psr-support
+[coveralls-svg]: https://coveralls.io/repos/github/MilesChou/psr-support/badge.svg?branch=master
+[coveralls-link]: https://coveralls.io/github/MilesChou/psr-support
