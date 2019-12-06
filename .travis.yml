@@ -10,6 +10,12 @@ php:
   - 7.1
   - 7.2
   - 7.3
+  - 7.4
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
 
 install:
   - composer install --prefer-dist
@@ -18,7 +24,7 @@ script:
   - make test
 
 after_success:
-  - if [[ "7.2" == "${TRAVIS_PHP_VERSION}" ]]; then travis_retry php vendor/bin/php-coveralls -v ; fi
+  - if [[ "7.3" == "${TRAVIS_PHP_VERSION}" ]]; then bash <(curl -s https://codecov.io/bash) ; fi
 
 cache:
   directories:
