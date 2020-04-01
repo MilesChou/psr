@@ -13,11 +13,6 @@ use Psr\Http\Message\RequestInterface;
 trait RequestFactory
 {
     /**
-     * @var string
-     */
-    protected $requestFactoryClass = '';
-
-    /**
      * @var RequestFactoryInterface
      */
     private $requestFactory;
@@ -53,12 +48,6 @@ trait RequestFactory
     {
         if ($this->requestFactory instanceof RequestFactoryInterface) {
             return $this->requestFactory;
-        }
-
-        if (class_exists($this->requestFactoryClass)) {
-            $class = $this->requestFactoryClass;
-
-            return $this->requestFactory = new $class();
         }
 
         return self::resolveRequestFactory();

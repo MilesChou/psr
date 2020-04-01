@@ -36,15 +36,4 @@ class ResponseFactoryTest extends TestCase
         $this->assertInstanceOf(NyholmFactory::class, $target->responseFactory());
         $this->assertInstanceOf(NyholmResponse::class, $target->createResponse());
     }
-
-    /**
-     * @test
-     */
-    public function shouldReturnSpecifyClass(): void
-    {
-        $target = new TestResponseFactory();
-
-        $this->assertInstanceOf(LaminasResponseFactory::class, $target->responseFactory());
-        $this->assertInstanceOf(LaminasResponse::class, $target->createResponse());
-    }
 }

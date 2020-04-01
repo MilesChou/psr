@@ -14,11 +14,6 @@ use Psr\Http\Message\UriInterface;
 trait ServerRequestFactory
 {
     /**
-     * @var string
-     */
-    protected $serverRequestFactoryClass = '';
-
-    /**
      * @var ServerRequestFactoryInterface
      */
     private $serverRequestFactory;
@@ -62,13 +57,6 @@ trait ServerRequestFactory
         if ($this->serverRequestFactory instanceof ServerRequestFactoryInterface) {
             return $this->serverRequestFactory;
         }
-
-        if (class_exists($this->serverRequestFactoryClass)) {
-            $class = $this->serverRequestFactoryClass;
-
-            return $this->serverRequestFactory = new $class();
-        }
-
 
         return self::resolveServerRequestFactory();
     }

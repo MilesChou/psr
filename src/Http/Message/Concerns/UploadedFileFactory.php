@@ -15,11 +15,6 @@ use Psr\Http\Message\UriFactoryInterface;
 trait UploadedFileFactory
 {
     /**
-     * @var string
-     */
-    protected $uploadedFileFactoryClass = '';
-
-    /**
      * @var UploadedFileFactoryInterface
      */
     private $uploadedFileFactory;
@@ -66,12 +61,6 @@ trait UploadedFileFactory
     {
         if ($this->uploadedFileFactory instanceof UploadedFileFactoryInterface) {
             return $this->uploadedFileFactory;
-        }
-
-        if (class_exists($this->uploadedFileFactoryClass)) {
-            $class = $this->uploadedFileFactoryClass;
-
-            return $this->uploadedFileFactory = new $class();
         }
 
         return self::resolveUploadedFileFactory();

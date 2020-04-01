@@ -13,11 +13,6 @@ use Psr\Http\Message\StreamInterface;
 trait StreamFactory
 {
     /**
-     * @var string
-     */
-    protected $streamFactoryClass = '';
-
-    /**
      * @var StreamFactoryInterface
      */
     private $streamFactory;
@@ -47,24 +42,6 @@ trait StreamFactory
     }
 
     /**
-     * @return StreamFactoryInterface
-     */
-    public function streamFactory(): StreamFactoryInterface
-    {
-        if ($this->streamFactory instanceof StreamFactoryInterface) {
-            return $this->streamFactory;
-        }
-
-        if (class_exists($this->streamFactoryClass)) {
-            $class = $this->streamFactoryClass;
-
-            return $this->streamFactory = new $class();
-        }
-
-        return self::resolveStreamFactory();
-    }
-
-    /**
      * @inheritDoc
      */
     public function createStreamFromFile(string $filename, string $mode = 'r'): StreamInterface
@@ -86,6 +63,18 @@ trait StreamFactory
         }
 
         return $this->streamFactory->createStreamFromResource($resource);
+    }
+
+    /**
+     * @return StreamFactoryInterface
+     */
+    public function streamFactory(): StreamFactoryInterface
+    {
+        if ($this->streamFactory instanceof StreamFactoryInterface) {
+            return $this->streamFactory;
+        }
+
+        return self::resolveStreamFactory();
     }
 
     /**

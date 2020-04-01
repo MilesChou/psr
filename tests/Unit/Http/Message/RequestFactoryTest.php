@@ -37,15 +37,4 @@ class RequestFactoryTest extends TestCase
         $this->assertInstanceOf(NyholmFactory::class, $target->requestFactory());
         $this->assertInstanceOf(NyholmRequest::class, $target->createRequest('GET', 'whatever'));
     }
-
-    /**
-     * @test
-     */
-    public function shouldReturnSpecifyClass(): void
-    {
-        $target = new TestRequestFactory();
-
-        $this->assertInstanceOf(LaminasRequestFactory::class, $target->requestFactory());
-        $this->assertInstanceOf(LaminasRequest::class, $target->createRequest('GET', 'whatever'));
-    }
 }

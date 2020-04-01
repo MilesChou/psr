@@ -36,15 +36,4 @@ class UriFactoryTest extends TestCase
         $this->assertInstanceOf(NyholmFactory::class, $target->uriFactory());
         $this->assertInstanceOf(NyholmUri::class, $target->createUri());
     }
-
-    /**
-     * @test
-     */
-    public function shouldReturnSpecifyClass(): void
-    {
-        $target = new TestUriFactory();
-
-        $this->assertInstanceOf(LaminasUriFactory::class, $target->uriFactory());
-        $this->assertInstanceOf(LaminasUri::class, $target->createUri());
-    }
 }

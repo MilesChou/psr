@@ -39,17 +39,4 @@ class UploadedFileFactoryTest extends TestCase
             (new NyholmFactory())->createStream()
         ));
     }
-
-    /**
-     * @test
-     */
-    public function shouldReturnSpecifyClass(): void
-    {
-        $target = new TestUploadedFileFactory();
-
-        $this->assertInstanceOf(LaminasUploadedFileFactory::class, $target->uploadedFileFactory());
-        $this->assertInstanceOf(LaminasUploadedFile::class, $target->createUploadedFile(
-            (new LaminasStreamFactory())->createStream()
-        ));
-    }
 }

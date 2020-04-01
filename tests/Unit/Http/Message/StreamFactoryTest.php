@@ -36,15 +36,4 @@ class StreamFactoryTest extends TestCase
         $this->assertInstanceOf(NyholmFactory::class, $target->streamFactory());
         $this->assertInstanceOf(NyholmStream::class, $target->createStream());
     }
-
-    /**
-     * @test
-     */
-    public function shouldReturnSpecifyClass(): void
-    {
-        $target = new TestStreamFactory();
-
-        $this->assertInstanceOf(LaminasStreamFactory::class, $target->streamFactory());
-        $this->assertInstanceOf(LaminasStream::class, $target->createStream());
-    }
 }

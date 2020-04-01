@@ -13,11 +13,6 @@ use Psr\Http\Message\UriInterface;
 trait UriFactory
 {
     /**
-     * @var string
-     */
-    protected $uriFactoryClass = '';
-
-    /**
      * @var UriFactoryInterface
      */
     private $uriFactory;
@@ -53,12 +48,6 @@ trait UriFactory
     {
         if ($this->uriFactory instanceof UriFactoryInterface) {
             return $this->uriFactory;
-        }
-
-        if (class_exists($this->uriFactoryClass)) {
-            $class = $this->uriFactoryClass;
-
-            return $this->uriFactory = new $class();
         }
 
         return self::resolveUriFactory();
