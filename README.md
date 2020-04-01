@@ -15,7 +15,7 @@ When we write a package but we don't want limit on any PSR-17 library.
 
 ### PSR-17 HTTP Factory
 
-Auto detector for HTTP Factory.
+Auto detect for HTTP Factory implementation.
 
 ```php
 use MilesChou\Psr\Http\Message\ResponseFactory;
