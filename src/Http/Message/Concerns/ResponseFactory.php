@@ -68,7 +68,7 @@ trait ResponseFactory
      * @param ResponseFactoryInterface $responseFactory
      * @return $this
      */
-    public function setResponseFactory(ResponseFactoryInterface $responseFactory): self
+    public function setResponseFactory(?ResponseFactoryInterface $responseFactory): self
     {
         $this->responseFactory = $responseFactory;
         return $this;

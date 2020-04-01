@@ -68,7 +68,7 @@ trait RequestFactory
      * @param RequestFactoryInterface $requestFactory
      * @return $this
      */
-    public function setRequestFactory(RequestFactoryInterface $requestFactory): self
+    public function setRequestFactory(?RequestFactoryInterface $requestFactory): self
     {
         $this->requestFactory = $requestFactory;
         return $this;

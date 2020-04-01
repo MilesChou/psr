@@ -69,6 +69,7 @@ trait ServerRequestFactory
             return $this->serverRequestFactory = new $class();
         }
 
+
         return self::resolveServerRequestFactory();
     }
 
@@ -76,7 +77,7 @@ trait ServerRequestFactory
      * @param ServerRequestFactoryInterface $serverRequestFactory
      * @return $this
      */
-    public function setServerRequestFactory(ServerRequestFactoryInterface $serverRequestFactory): self
+    public function setServerRequestFactory(?ServerRequestFactoryInterface $serverRequestFactory): self
     {
         $this->serverRequestFactory = $serverRequestFactory;
         return $this;

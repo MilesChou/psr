@@ -68,7 +68,7 @@ trait UriFactory
      * @param UriFactoryInterface $uriFactory
      * @return $this
      */
-    public function setUriFactory(UriFactoryInterface $uriFactory): self
+    public function setUriFactory(?UriFactoryInterface $uriFactory): self
     {
         $this->uriFactory = $uriFactory;
         return $this;

@@ -92,7 +92,7 @@ trait StreamFactory
      * @param StreamFactoryInterface $streamFactory
      * @return $this
      */
-    public function setStreamFactory(StreamFactoryInterface $streamFactory): self
+    public function setStreamFactory(?StreamFactoryInterface $streamFactory): self
     {
         $this->streamFactory = $streamFactory;
         return $this;

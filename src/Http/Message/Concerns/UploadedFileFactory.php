@@ -81,7 +81,7 @@ trait UploadedFileFactory
      * @param UploadedFileFactoryInterface $uploadedFileFactory
      * @return $this
      */
-    public function setUploadedFileFactory(UploadedFileFactoryInterface $uploadedFileFactory): self
+    public function setUploadedFileFactory(?UploadedFileFactoryInterface $uploadedFileFactory): self
     {
         $this->uploadedFileFactory = $uploadedFileFactory;
         return $this;

@@ -9,4 +9,12 @@ use Psr\Http\Message\UriFactoryInterface;
 class UriFactory implements UriFactoryInterface
 {
     use Concerns\UriFactory;
+
+    /**
+     * @param UriFactoryInterface|null $factory
+     */
+    public function __construct($factory = null)
+    {
+        $this->setUriFactory($factory);
+    }
 }
