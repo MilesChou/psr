@@ -2,7 +2,7 @@
 
 namespace Tests\Log;
 
-use MilesChou\PsrSupport\Log\LoggerAwareTrait;
+use MilesChou\Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +14,7 @@ class LoggerTraitTest extends TestCase
     /**
      * @test
      */
-    public function shouldNotCallLoggerInstanceWhenNotSetLogger()
+    public function shouldNotCallLoggerInstanceWhenNotSetLogger(): void
     {
         $logger = $this->getMockBuilder(LoggerInterface::class)
             ->getMock();

@@ -1,10 +1,10 @@
 <?php
 
-namespace MilesChou\PsrSupport\SimpleCache;
+namespace MilesChou\Psr\SimpleCache;
 
 use DateInterval;
 use DateTimeImmutable;
-use MilesChou\PsrSupport\SimpleCache\Exceptions\InvalidArgumentException;
+use MilesChou\Psr\SimpleCache\Exceptions\InvalidArgumentException;
 use Traversable;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace MilesChou\PsrSupport\SimpleCache;
+namespace MilesChou\Psr\SimpleCache;
 
 use DateInterval;
 use Psr\SimpleCache\CacheInterface;

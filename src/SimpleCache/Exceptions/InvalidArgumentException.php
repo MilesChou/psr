@@ -1,6 +1,6 @@
 <?php
 
-namespace MilesChou\PsrSupport\SimpleCache\Exceptions;
+namespace MilesChou\Psr\SimpleCache\Exceptions;
 
 use InvalidArgumentException as BaseInvalidArgumentException;
 use Psr\SimpleCache\InvalidArgumentException as ContractInvalidArgumentException;

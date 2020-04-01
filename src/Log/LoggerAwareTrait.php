@@ -1,6 +1,6 @@
 <?php
 
-namespace MilesChou\PsrSupport\Log;
+namespace MilesChou\Psr\Log;
 
 use Psr\Log\LoggerAwareTrait as BaseLoggerAwareTrait;
 

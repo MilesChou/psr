@@ -4,25 +4,14 @@ namespace Tests\SimpleCache;
 
 use DateInterval;
 use DateTimeImmutable;
-use MilesChou\PsrSupport\SimpleCache\Helper;
+use MilesChou\Psr\SimpleCache\Helper;
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\InvalidArgumentException;
 use stdClass;
 
 class HelperTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider getTtlCases
-     */
-    public function shouldGetExceptedResultWhenCallNormalizeTtl($ttl, $excepted)
-    {
-        $actual = Helper::normalizeTtl($ttl);
-
-        $this->assertSame($excepted, $actual);
-    }
-
-    public function getTtlCases()
+    public function getTtlCases(): array
     {
         return [
             [null, null],
@@ -33,8 +22,19 @@ class HelperTest extends TestCase
 
     /**
      * @test
+     * @dataProvider getTtlCases
      */
-    public function shouldGetExceptedResultWhenCallNormalizeExpireAtWithInt()
+    public function shouldGetExceptedResultWhenCallNormalizeTtl($ttl, $excepted): void
+    {
+        $actual = Helper::normalizeTtl($ttl);
+
+        $this->assertSame($excepted, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetExceptedResultWhenCallNormalizeExpireAtWithInt(): void
     {
         $ttl = 3600;
         $excepted = time() + $ttl;
@@ -47,7 +47,7 @@ class HelperTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetExceptedResultWhenCallNormalizeExpireAtWithDateInterval()
+    public function shouldGetExceptedResultWhenCallNormalizeExpireAtWithDateInterval(): void
     {
         $ttl = new DateInterval('PT1H');
         $excepted = (new DateTimeImmutable)->add($ttl)->getTimestamp();
@@ -60,7 +60,7 @@ class HelperTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetExceptedResultWhenCallNormalizeExpireAtWithNull()
+    public function shouldGetExceptedResultWhenCallNormalizeExpireAtWithNull(): void
     {
         $ttl = $excepted = null;
 
@@ -69,27 +69,7 @@ class HelperTest extends TestCase
         $this->assertSame($excepted, $actual);
     }
 
-    /**
-     * @test
-     * @dataProvider getInvalidTtlCases
-     * @expectedException InvalidArgumentException
-     */
-    public function shouldThrowExceptionWhenCallNormalizeTtlWith($invalidTtl)
-    {
-        Helper::normalizeTtl($invalidTtl);
-    }
-
-    /**
-     * @test
-     * @dataProvider getInvalidTtlCases
-     * @expectedException InvalidArgumentException
-     */
-    public function shouldThrowExceptionWhenCallNormalizeExpireAtWith($invalidTtl)
-    {
-        Helper::normalizeExpireAt($invalidTtl);
-    }
-
-    public function getInvalidTtlCases()
+    public function getInvalidTtlCases(): array
     {
         return [
             ['string'],
@@ -102,15 +82,27 @@ class HelperTest extends TestCase
 
     /**
      * @test
-     * @dataProvider getInvalidKeys
-     * @expectedException InvalidArgumentException
+     * @dataProvider getInvalidTtlCases
      */
-    public function shouldThrowExceptionWhenCheckStringTypeWith($invalidKey)
+    public function shouldThrowExceptionWhenCallNormalizeTtlWith($invalidTtl): void
     {
-        Helper::checkStringType($invalidKey);
+        $this->expectException(InvalidArgumentException::class);
+
+        Helper::normalizeTtl($invalidTtl);
     }
 
-    public function getInvalidKeys()
+    /**
+     * @test
+     * @dataProvider getInvalidTtlCases
+     */
+    public function shouldThrowExceptionWhenCallNormalizeExpireAtWith($invalidTtl): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Helper::normalizeExpireAt($invalidTtl);
+    }
+
+    public function getInvalidKeys(): array
     {
         return [
             [123],
@@ -124,8 +116,19 @@ class HelperTest extends TestCase
 
     /**
      * @test
+     * @dataProvider getInvalidKeys
      */
-    public function shouldBeOkayWhenCheckTraversableTypeWithTraversableInput()
+    public function shouldThrowExceptionWhenCheckStringTypeWith($invalidKey): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Helper::checkStringType($invalidKey);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeOkayWhenCheckTraversableTypeWithTraversableInput(): void
     {
         Helper::checkTraversableType($this->getMockBuilder(\Traversable::class)->getMock());
         Helper::checkTraversableType(new \ArrayObject());
@@ -135,25 +138,15 @@ class HelperTest extends TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
      */
-    public function shouldThrowExceptionWhenCheckTraversableTypeWithNotTraversableInput()
+    public function shouldThrowExceptionWhenCheckTraversableTypeWithNotTraversableInput(): void
     {
+        $this->expectException(InvalidArgumentException::class);
+
         Helper::checkTraversableType('test');
     }
 
-    /**
-     * @test
-     * @dataProvider validTtlType
-     */
-    public function shouldBeOkayWhenCheckTtlTypeWith($validInput)
-    {
-        Helper::checkTtlType($validInput);
-
-        $this->assertTrue(true);
-    }
-
-    public function validTtlType()
+    public function validTtlType(): array
     {
         return [
             [null],
@@ -164,15 +157,16 @@ class HelperTest extends TestCase
 
     /**
      * @test
-     * @dataProvider invalidTtlType
-     * @expectedException InvalidArgumentException
+     * @dataProvider validTtlType
      */
-    public function shouldThrowExceptionWhenCheckTtlTypeWith($invalidInput)
+    public function shouldBeOkayWhenCheckTtlTypeWith($validInput): void
     {
-        Helper::checkTtlType($invalidInput);
+        Helper::checkTtlType($validInput);
+
+        $this->assertTrue(true);
     }
 
-    public function invalidTtlType()
+    public function invalidTtlType(): array
     {
         return [
             ['string'],
@@ -181,5 +175,16 @@ class HelperTest extends TestCase
             [[]],
             [new stdClass()],
         ];
+    }
+
+    /**
+     * @test
+     * @dataProvider invalidTtlType
+     */
+    public function shouldThrowExceptionWhenCheckTtlTypeWith($invalidInput): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Helper::checkTtlType($invalidInput);
     }
 }

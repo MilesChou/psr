@@ -1,6 +1,6 @@
 <?php
 
-namespace MilesChou\PsrSupport\Container;
+namespace MilesChou\Psr\Container;
 
 use Psr\Container\ContainerInterface;
 

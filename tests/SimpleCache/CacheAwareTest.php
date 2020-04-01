@@ -2,7 +2,7 @@
 
 namespace Tests\SimpleCache;
 
-use MilesChou\PsrSupport\SimpleCache\CacheAwareTrait;
+use MilesChou\Psr\SimpleCache\CacheAwareTrait;
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\InvalidArgumentException;
 
@@ -11,15 +11,16 @@ class CacheAwareTest extends TestCase
     /**
      * @test
      * @dataProvider getInvalidTtlCases
-     * @expectedException InvalidArgumentException
      */
-    public function shouldThrowExceptionWhenGivenInvalidTTL($invalidTtl)
+    public function shouldThrowExceptionWhenGivenInvalidTTL($invalidTtl): void
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $target = $this->getMockForTrait(CacheAwareTrait::class);
         $target->setTtl($invalidTtl);
     }
 
-    public function getInvalidTtlCases()
+    public function getInvalidTtlCases(): array
     {
         return [
             [false],
@@ -30,21 +31,7 @@ class CacheAwareTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider getValidTtlCases
-     */
-    public function shouldGetTtlWhenGivenValidTTL($excepted)
-    {
-        $target = $this->getMockForTrait(CacheAwareTrait::class);
-        $target->setTtl($excepted);
-
-        $actual = $target->getTtl();
-
-        $this->assertSame($excepted, $actual);
-    }
-
-    public function getValidTtlCases()
+    public function getValidTtlCases(): array
     {
         return [
             [null],
@@ -55,8 +42,22 @@ class CacheAwareTest extends TestCase
 
     /**
      * @test
+     * @dataProvider getValidTtlCases
      */
-    public function shouldGetDefaultTtlWhenDoNotSetTTL()
+    public function shouldGetTtlWhenGivenValidTTL($excepted): void
+    {
+        $target = $this->getMockForTrait(CacheAwareTrait::class);
+        $target->setTtl($excepted);
+
+        $actual = $target->getTtl();
+
+        $this->assertSame($excepted, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetDefaultTtlWhenDoNotSetTTL(): void
     {
         $excepted = 60;
 
