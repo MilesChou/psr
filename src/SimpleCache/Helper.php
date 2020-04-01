@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MilesChou\Psr\SimpleCache;
 
 use DateInterval;
@@ -14,9 +16,8 @@ class Helper
 {
     /**
      * @param mixed $value
-     * @throws InvalidArgumentException
      */
-    public static function checkStringType($value)
+    public static function checkStringType($value): void
     {
         if (!is_string($value)) {
             $type = gettype($value);
@@ -26,9 +27,8 @@ class Helper
 
     /**
      * @param mixed $value
-     * @throws InvalidArgumentException
      */
-    public static function checkTraversableType($value)
+    public static function checkTraversableType($value): void
     {
         if (!is_array($value) && !($value instanceof Traversable)) {
             $type = gettype($value);
@@ -38,9 +38,8 @@ class Helper
 
     /**
      * @param mixed $value
-     * @throws InvalidArgumentException
      */
-    public static function checkTtlType($value)
+    public static function checkTtlType($value): void
     {
         $isNull = $value === null;
         $isInt = is_int($value);
@@ -57,9 +56,8 @@ class Helper
      *
      * @param null|int|DateInterval $ttl
      * @return null|int
-     * @throws InvalidArgumentException
      */
-    public static function normalizeExpireAt($ttl)
+    public static function normalizeExpireAt($ttl): ?int
     {
         self::checkTtlType($ttl);
 
@@ -68,7 +66,7 @@ class Helper
         }
 
         if ($ttl instanceof DateInterval) {
-            $now = new DateTimeImmutable;
+            $now = new DateTimeImmutable();
             return $now->add($ttl)->getTimestamp();
         }
 
@@ -80,9 +78,8 @@ class Helper
      *
      * @param null|int|DateInterval $ttl
      * @return null|int
-     * @throws InvalidArgumentException
      */
-    public static function normalizeTtl($ttl)
+    public static function normalizeTtl($ttl): ?int
     {
         self::checkTtlType($ttl);
 
@@ -91,7 +88,7 @@ class Helper
         }
 
         if ($ttl instanceof DateInterval) {
-            $now = new DateTimeImmutable;
+            $now = new DateTimeImmutable();
             return $now->add($ttl)->getTimestamp() - $now->getTimestamp();
         }
 

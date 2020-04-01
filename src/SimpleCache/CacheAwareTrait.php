@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MilesChou\Psr\SimpleCache;
 
 use DateInterval;
@@ -37,7 +39,7 @@ trait CacheAwareTrait
      *
      * @param CacheInterface $cache
      */
-    public function setCache(CacheInterface $cache = null)
+    public function setCache(CacheInterface $cache = null): void
     {
         $this->cache = $cache;
     }
@@ -46,9 +48,8 @@ trait CacheAwareTrait
      * Set the cache TTL
      *
      * @param null|int|DateInterval $ttl Unit is Second
-     * @throws InvalidArgumentException
      */
-    public function setTtl($ttl)
+    public function setTtl($ttl): void
     {
         Helper::checkTtlType($ttl);
 

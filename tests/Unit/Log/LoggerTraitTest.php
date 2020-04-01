@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Log;
 
 use MilesChou\Psr\Log\LoggerAwareTrait;

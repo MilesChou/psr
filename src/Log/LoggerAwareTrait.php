@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MilesChou\Psr\Log;
 
 use Psr\Log\LoggerAwareTrait as BaseLoggerAwareTrait;
@@ -15,7 +17,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array $context
      */
-    protected function log($level, $message, array $context = [])
+    protected function log($level, $message, array $context = []): void
     {
         if (null !== $this->logger) {
             $this->logger->log($level, $message, $context);

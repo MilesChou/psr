@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MilesChou\Psr\SimpleCache\Exceptions;
 
 use InvalidArgumentException as BaseInvalidArgumentException;
