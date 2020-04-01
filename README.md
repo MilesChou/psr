@@ -9,6 +9,34 @@
 
 The support library for PSR.
 
+## PSR-17 HTTP Factory
+
+Auto detector for HTTP Factory.
+
+```php
+use MilesChou\Psr\Http\Message\ResponseFactory;
+
+$factory = new ResponseFactory();
+
+// return Laminas Response when install Laminas only
+$factory->createResponse();
+
+// return Nyholm Response when install Nyholm only
+$factory->createResponse();
+```
+
+Custom / force specify the factory instance.
+
+```php
+use Laminas\Diactoros\ResponseFactory as LaminasResponseFactory;
+use MilesChou\Psr\Http\Message\ResponseFactory;
+
+$factory = new ResponseFactory(new LaminasResponseFactory());
+
+// return Laminas Response when install Laminas only
+$factory->createResponse();
+```
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
