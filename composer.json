@@ -1,6 +1,6 @@
 {
-    "name": "mileschou/psr-support",
-    "description": "The support classes for PSR",
+    "name": "mileschou/psr",
+    "description": "The support library for PSR",
     "type": "library",
     "license": "MIT",
     "keywords": [
