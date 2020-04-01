@@ -16,7 +16,7 @@ trait ServerRequestFactory
     /**
      * @var string
      */
-    protected $serverRequestFactoryClass;
+    protected $serverRequestFactoryClass = '';
 
     /**
      * @var ServerRequestFactoryInterface
@@ -66,7 +66,7 @@ trait ServerRequestFactory
         if (class_exists($this->serverRequestFactoryClass)) {
             $class = $this->serverRequestFactoryClass;
 
-            return $this->serverRequestFactoryClass = new $class();
+            return $this->serverRequestFactory = new $class();
         }
 
         return self::resolveServerRequestFactory();

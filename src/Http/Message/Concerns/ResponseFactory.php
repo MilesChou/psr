@@ -15,7 +15,7 @@ trait ResponseFactory
     /**
      * @var string
      */
-    protected $responseFactoryClass;
+    protected $responseFactoryClass = '';
 
     /**
      * @var ResponseFactoryInterface

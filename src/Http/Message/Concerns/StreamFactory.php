@@ -15,7 +15,7 @@ trait StreamFactory
     /**
      * @var string
      */
-    protected $streamFactoryClass;
+    protected $streamFactoryClass = '';
 
     /**
      * @var StreamFactoryInterface
@@ -58,7 +58,7 @@ trait StreamFactory
         if (class_exists($this->streamFactoryClass)) {
             $class = $this->streamFactoryClass;
 
-            return $this->streamFactoryClass = new $class();
+            return $this->streamFactory = new $class();
         }
 
         return self::resolveStreamFactory();

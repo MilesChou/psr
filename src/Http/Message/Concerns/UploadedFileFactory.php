@@ -17,7 +17,7 @@ trait UploadedFileFactory
     /**
      * @var string
      */
-    protected $uploadedFileFactoryClass;
+    protected $uploadedFileFactoryClass = '';
 
     /**
      * @var UploadedFileFactoryInterface
@@ -50,10 +50,6 @@ trait UploadedFileFactory
         string $clientFilename = null,
         string $clientMediaType = null
     ): UploadedFileInterface {
-        if (null === $this->uploadedFileFactory) {
-            $this->uploadedFileFactory = self::resolveUploadedFileFactory();
-        }
-
         return $this->uploadedFileFactory()->createUploadedFile(
             $stream,
             $size,
@@ -75,7 +71,7 @@ trait UploadedFileFactory
         if (class_exists($this->uploadedFileFactoryClass)) {
             $class = $this->uploadedFileFactoryClass;
 
-            return $this->uploadedFileFactoryClass = new $class();
+            return $this->uploadedFileFactory = new $class();
         }
 
         return self::resolveUploadedFileFactory();

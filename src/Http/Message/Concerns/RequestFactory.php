@@ -15,7 +15,7 @@ trait RequestFactory
     /**
      * @var string
      */
-    protected $requestFactoryClass;
+    protected $requestFactoryClass = '';
 
     /**
      * @var RequestFactoryInterface

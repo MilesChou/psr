@@ -15,7 +15,7 @@ trait UriFactory
     /**
      * @var string
      */
-    protected $uriFactoryClass;
+    protected $uriFactoryClass = '';
 
     /**
      * @var UriFactoryInterface
@@ -58,10 +58,10 @@ trait UriFactory
         if (class_exists($this->uriFactoryClass)) {
             $class = $this->uriFactoryClass;
 
-            return $this->uriFactoryClass = new $class();
+            return $this->uriFactory = new $class();
         }
 
-        throw new \LogicException('UriFactory class is not found');
+        return self::resolveUriFactory();
     }
 
     /**
