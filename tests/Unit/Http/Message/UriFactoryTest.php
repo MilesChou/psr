@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\HttpFactory;
+namespace Tests\Unit\Http\Message;
 
 use Laminas\Diactoros\Uri as LaminasUri;
 use Laminas\Diactoros\UriFactory as LaminasUriFactory;

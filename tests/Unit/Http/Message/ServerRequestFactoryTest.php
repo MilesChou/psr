@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\HttpFactory;
+namespace Tests\Unit\Http\Message;
 
 use Laminas\Diactoros\ServerRequest as LaminasServerRequest;
 use Laminas\Diactoros\ServerRequestFactory as LaminasServerRequestFactory;
