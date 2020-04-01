@@ -2,16 +2,21 @@
 
 declare(strict_types=1);
 
-namespace MilesChou\Psr\HttpFactory\Concerns;
+namespace MilesChou\Psr\Http\Message\Concerns;
 
 use DomainException;
-use Laminas\Diactoros\StreamFactory as LaminasStreamFactory;
+use Laminas\Diactoros\StreamFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
 trait StreamFactory
 {
+    /**
+     * @var string
+     */
+    protected $streamFactoryClass;
+
     /**
      * @var StreamFactoryInterface
      */
@@ -20,17 +25,17 @@ trait StreamFactory
     /**
      * @return StreamFactoryInterface
      */
-    public static function createStreamFactory(): StreamFactoryInterface
+    public static function resolveStreamFactory(): StreamFactoryInterface
     {
-        if (class_exists(LaminasStreamFactory::class)) {
-            return new LaminasStreamFactory();
+        if (class_exists(LaminasFactory::class)) {
+            return new LaminasFactory();
         }
 
         if (class_exists(NyholmFactory::class)) {
             return new NyholmFactory();
         }
 
-        throw new DomainException('PSR-17 driver is not found');
+        throw new DomainException('StreamFactory driver is not found');
     }
 
     /**
@@ -38,11 +43,25 @@ trait StreamFactory
      */
     public function createStream(string $content = ''): StreamInterface
     {
-        if (null === $this->streamFactory) {
-            $this->streamFactory = self::createStreamFactory();
+        return $this->streamFactory()->createStream($content);
+    }
+
+    /**
+     * @return StreamFactoryInterface
+     */
+    public function streamFactory(): StreamFactoryInterface
+    {
+        if ($this->streamFactory instanceof StreamFactoryInterface) {
+            return $this->streamFactory;
         }
 
-        return $this->streamFactory->createStream($content);
+        if (class_exists($this->streamFactoryClass)) {
+            $class = $this->streamFactoryClass;
+
+            return $this->streamFactoryClass = new $class();
+        }
+
+        return self::resolveStreamFactory();
     }
 
     /**
@@ -51,7 +70,7 @@ trait StreamFactory
     public function createStreamFromFile(string $filename, string $mode = 'r'): StreamInterface
     {
         if (null === $this->streamFactory) {
-            $this->streamFactory = self::createStreamFactory();
+            $this->streamFactory = self::resolveStreamFactory();
         }
 
         return $this->streamFactory->createStreamFromFile($filename, $mode);
@@ -63,7 +82,7 @@ trait StreamFactory
     public function createStreamFromResource($resource): StreamInterface
     {
         if (null === $this->streamFactory) {
-            $this->streamFactory = self::createStreamFactory();
+            $this->streamFactory = self::resolveStreamFactory();
         }
 
         return $this->streamFactory->createStreamFromResource($resource);

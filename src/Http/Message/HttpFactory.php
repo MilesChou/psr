@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MilesChou\Psr\HttpFactory;
+namespace MilesChou\Psr\Http\Message;
 
 class HttpFactory implements HttpFactoryInterface
 {

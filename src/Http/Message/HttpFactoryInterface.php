@@ -1,6 +1,6 @@
 <?php
 
-namespace MilesChou\Psr\HttpFactory;
+namespace MilesChou\Psr\Http\Message;
 
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseFactoryInterface;

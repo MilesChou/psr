@@ -2,16 +2,21 @@
 
 declare(strict_types=1);
 
-namespace MilesChou\Psr\HttpFactory\Concerns;
+namespace MilesChou\Psr\Http\Message\Concerns;
 
 use DomainException;
-use Laminas\Diactoros\UriFactory as LaminasUriFactory;
+use Laminas\Diactoros\UriFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
 trait UriFactory
 {
+    /**
+     * @var string
+     */
+    protected $uriFactoryClass;
+
     /**
      * @var UriFactoryInterface
      */
@@ -20,10 +25,10 @@ trait UriFactory
     /**
      * @return UriFactoryInterface
      */
-    public static function createUriFactory(): UriFactoryInterface
+    public static function resolveUriFactory(): UriFactoryInterface
     {
-        if (class_exists(LaminasUriFactory::class)) {
-            return new LaminasUriFactory();
+        if (class_exists(LaminasFactory::class)) {
+            return new LaminasFactory();
         }
 
         if (class_exists(NyholmFactory::class)) {
@@ -38,11 +43,25 @@ trait UriFactory
      */
     public function createUri(string $uri = ''): UriInterface
     {
-        if (null === $this->uriFactory) {
-            $this->uriFactory = self::createUriFactory();
+        return $this->uriFactory()->createUri($uri);
+    }
+
+    /**
+     * @return UriFactoryInterface
+     */
+    public function uriFactory(): UriFactoryInterface
+    {
+        if ($this->uriFactory instanceof UriFactoryInterface) {
+            return $this->uriFactory;
         }
 
-        return $this->uriFactory->createUri($uri);
+        if (class_exists($this->uriFactoryClass)) {
+            $class = $this->uriFactoryClass;
+
+            return $this->uriFactoryClass = new $class();
+        }
+
+        throw new \LogicException('UriFactory class is not found');
     }
 
     /**

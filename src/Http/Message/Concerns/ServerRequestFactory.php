@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MilesChou\Psr\HttpFactory\Concerns;
+namespace MilesChou\Psr\Http\Message\Concerns;
 
 use DomainException;
-use Laminas\Diactoros\ServerRequestFactory as LaminasServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,6 +14,11 @@ use Psr\Http\Message\UriInterface;
 trait ServerRequestFactory
 {
     /**
+     * @var string
+     */
+    protected $serverRequestFactoryClass;
+
+    /**
      * @var ServerRequestFactoryInterface
      */
     private $serverRequestFactory;
@@ -21,10 +26,10 @@ trait ServerRequestFactory
     /**
      * @return ServerRequestFactoryInterface
      */
-    public static function createServerRequestFactory(): ServerRequestFactoryInterface
+    public static function resolveServerRequestFactory(): ServerRequestFactoryInterface
     {
-        if (class_exists(LaminasServerRequestFactory::class)) {
-            return new LaminasServerRequestFactory();
+        if (class_exists(LaminasFactory::class)) {
+            return new LaminasFactory();
         }
 
         if (class_exists(NyholmFactory::class)) {
@@ -43,10 +48,28 @@ trait ServerRequestFactory
     public function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
     {
         if (null === $this->serverRequestFactory) {
-            $this->serverRequestFactory = self::createServerRequestFactory();
+            $this->serverRequestFactory = self::resolveServerRequestFactory();
         }
 
         return $this->serverRequestFactory->createServerRequest($method, $uri, $serverParams);
+    }
+
+    /**
+     * @return ServerRequestFactoryInterface
+     */
+    public function serverRequestFactory(): ServerRequestFactoryInterface
+    {
+        if ($this->serverRequestFactory instanceof ServerRequestFactoryInterface) {
+            return $this->serverRequestFactory;
+        }
+
+        if (class_exists($this->serverRequestFactoryClass)) {
+            $class = $this->serverRequestFactoryClass;
+
+            return $this->serverRequestFactoryClass = new $class();
+        }
+
+        return self::resolveServerRequestFactory();
     }
 
     /**
