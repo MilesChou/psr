@@ -9,7 +9,11 @@
 
 The support library for PSR.
 
-## PSR-17 HTTP Factory
+## Use case for PSR-17 HTTP Factory wrapper
+
+When we write a package but we don't want limit on any PSR-17 library.
+
+### PSR-17 HTTP Factory
 
 Auto detector for HTTP Factory.
 
@@ -43,6 +47,8 @@ $factory = new ResponseFactory(new LaminasResponseFactory());
 // return Laminas Response when install Laminas only
 $factory->createResponse();
 ```
+
+> [More info](https://packagist.org/providers/psr/http-factory-implementation)
 
 ## License
 
