@@ -19,6 +19,8 @@
         "php": "^7.1"
     },
     "require-dev": {
+        "http-interop/http-factory-guzzle": "^1.0",
+        "http-interop/http-factory-slim": "^2.0",
         "laminas/laminas-diactoros": "^2.0",
         "nyholm/psr7": "^1.0",
         "phpunit/phpunit": "^7.5 | ^8 | ^9",

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace MilesChou\Psr\Http\Message\Concerns;
 
 use DomainException;
+use Http\Factory\Guzzle\ResponseFactory as GuzzleFactory;
+use Http\Factory\Slim\ResponseFactory as SlimFactory;
 use Laminas\Diactoros\ResponseFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -28,6 +30,14 @@ trait ResponseFactory
 
         if (class_exists(NyholmFactory::class)) {
             return new NyholmFactory();
+        }
+
+        if (class_exists(GuzzleFactory::class)) {
+            return new GuzzleFactory();
+        }
+
+        if (class_exists(SlimFactory::class)) {
+            return new SlimFactory();
         }
 
         throw new DomainException('ResponseFactory driver is not found');

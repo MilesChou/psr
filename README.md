@@ -25,6 +25,13 @@ $factory->createResponse();
 $factory->createResponse();
 ```
 
+Following is support library and order.
+
+* [`laminas/laminas-diactoros`](https://github.com/laminas/laminas-diactoros) ^2.0
+* [`nyholm/psr7`](https://github.com/Nyholm/psr7) ^1.0
+* [`http-interop/http-factory-guzzle`](https://github.com/http-interop/http-factory-guzzle) ^1.0
+* [`http-interop/http-factory-slim`](https://github.com/http-interop/http-factory-slim) ^2.0
+
 Custom / force specify the factory instance.
 
 ```php

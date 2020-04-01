@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace MilesChou\Psr\Http\Message\Concerns;
 
 use DomainException;
+use Http\Factory\Guzzle\UploadedFileFactory as GuzzleFactory;
+use Http\Factory\Slim\UploadedFileFactory as SlimFactory;
 use Laminas\Diactoros\UploadedFileFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Psr\Http\Message\UriFactoryInterface;
 
 trait UploadedFileFactory
 {
@@ -30,6 +31,14 @@ trait UploadedFileFactory
 
         if (class_exists(NyholmFactory::class)) {
             return new NyholmFactory();
+        }
+
+        if (class_exists(GuzzleFactory::class)) {
+            return new GuzzleFactory();
+        }
+
+        if (class_exists(SlimFactory::class)) {
+            return new SlimFactory();
         }
 
         throw new DomainException('UploadedFileFactory driver is not found');

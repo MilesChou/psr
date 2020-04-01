@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace MilesChou\Psr\Http\Message\Concerns;
 
 use DomainException;
+use Http\Factory\Guzzle\UriFactory as GuzzleFactory;
+use Http\Factory\Slim\UriFactory as SlimFactory;
 use Laminas\Diactoros\UriFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\UriFactoryInterface;
@@ -30,7 +32,15 @@ trait UriFactory
             return new NyholmFactory();
         }
 
-        throw new DomainException('PSR-17 driver is not found');
+        if (class_exists(GuzzleFactory::class)) {
+            return new GuzzleFactory();
+        }
+
+        if (class_exists(SlimFactory::class)) {
+            return new SlimFactory();
+        }
+
+        throw new DomainException('UriFactory driver is not found');
     }
 
     /**

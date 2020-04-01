@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace MilesChou\Psr\Http\Message\Concerns;
 
 use DomainException;
+use Http\Factory\Guzzle\StreamFactory as GuzzleFactory;
+use Http\Factory\Slim\StreamFactory as SlimFactory;
 use Laminas\Diactoros\StreamFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -28,6 +30,14 @@ trait StreamFactory
 
         if (class_exists(NyholmFactory::class)) {
             return new NyholmFactory();
+        }
+
+        if (class_exists(GuzzleFactory::class)) {
+            return new GuzzleFactory();
+        }
+
+        if (class_exists(SlimFactory::class)) {
+            return new SlimFactory();
         }
 
         throw new DomainException('StreamFactory driver is not found');
