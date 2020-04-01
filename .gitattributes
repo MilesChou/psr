@@ -2,6 +2,7 @@
 * text=lf
 
 # Exclude unused files
+/docs export-ignore
 /tests export-ignore
 /.gitattributes export-ignore
 /.gitignore export-ignore
