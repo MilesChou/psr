@@ -48,7 +48,7 @@ $factory = new ResponseFactory(new LaminasResponseFactory());
 $factory->createResponse();
 ```
 
-> [More info](https://packagist.org/providers/psr/http-factory-implementation)
+> [More implementations](https://packagist.org/providers/psr/http-factory-implementation)
 
 ## License
 
