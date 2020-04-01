@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Log;
+namespace Tests\Unit\Log;
 
 use MilesChou\Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;

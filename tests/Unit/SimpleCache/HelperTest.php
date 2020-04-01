@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\SimpleCache;
+namespace Tests\Unit\SimpleCache;
 
 use DateInterval;
 use DateTimeImmutable;
