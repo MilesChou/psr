@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Http\Message;
 
-use Laminas\Diactoros\ServerRequest as LaminasServerRequest;
-use Laminas\Diactoros\ServerRequestFactory as LaminasServerRequestFactory;
 use MilesChou\Psr\Http\Message\ServerRequestFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Nyholm\Psr7\ServerRequest as NyholmServerRequest;
 use Psr\Http\Message\ServerRequestFactoryInterface;
-use Tests\Fixtures\Psr17\TestServerRequestFactory;
 use Tests\TestCase;
 
 class ServerRequestFactoryTest extends TestCase

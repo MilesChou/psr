@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Http\Message;
 
-use Laminas\Diactoros\Stream as LaminasStream;
-use Laminas\Diactoros\StreamFactory as LaminasStreamFactory;
 use MilesChou\Psr\Http\Message\StreamFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Nyholm\Psr7\Stream as NyholmStream;
 use Psr\Http\Message\StreamFactoryInterface;
-use Tests\Fixtures\Psr17\TestStreamFactory;
 use Tests\TestCase;
 
 class StreamFactoryTest extends TestCase
