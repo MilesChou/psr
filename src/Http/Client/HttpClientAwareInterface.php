@@ -6,7 +6,7 @@ namespace MilesChou\Psr\Http\Client;
 
 use Psr\Http\Client\ClientInterface;
 
-interface ClientAwareInterface
+interface HttpClientAwareInterface
 {
     /**
      * @param ClientInterface $client
