@@ -4,6 +4,7 @@ namespace MilesChou\Psr\Http\Message;
 
 use MilesChou\Psr\Http\Client\HttpClientAwareTrait;
 use MilesChou\Psr\Http\Message\Traits\RequestProxy;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -23,6 +24,10 @@ class PendingRequest implements RequestInterface
         $this->httpClient = $client;
     }
 
+    /**
+     * @return ResponseInterface
+     * @throws ClientExceptionInterface
+     */
     public function send(): ResponseInterface
     {
         return $this->httpClient->sendRequest($this->request);
