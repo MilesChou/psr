@@ -11,6 +11,7 @@ The support library for PSR.
 
 ## Usage
 
+* [PSR-7 HTTP Message](docs/psr7-http-message.md)
 * [PSR-11 Container](docs/psr11-container.md)
 * [PSR-17 HTTP Factory](docs/psr17-http-factory.md)
 * [PSR-18 HTTP Client](docs/psr18-http-client.md)
