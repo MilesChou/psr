@@ -7,11 +7,11 @@ namespace Tests\Unit\Http\Client;
 use Laminas\Diactoros\Request;
 use Laminas\Diactoros\Response;
 use MilesChou\Mocker\Psr18\MockClient;
-use MilesChou\Psr\Http\Client\ClientManager;
+use MilesChou\Psr\Http\Client\HttpClientManager;
 use OutOfRangeException;
 use Tests\TestCase;
 
-class ClientManagerTest extends TestCase
+class HttpClientManagerTest extends TestCase
 {
     /**
      * @test
@@ -20,7 +20,7 @@ class ClientManagerTest extends TestCase
     {
         $expected = new MockClient();
 
-        $target = new ClientManager($expected);
+        $target = new HttpClientManager($expected);
 
         $this->assertSame($expected, $target->driver());
     }
@@ -32,7 +32,7 @@ class ClientManagerTest extends TestCase
     {
         $expected = new MockClient();
 
-        $target = new ClientManager(new MockClient());
+        $target = new HttpClientManager(new MockClient());
         $target->setDefault($expected);
 
         $this->assertSame($expected, $target->driver());
@@ -45,7 +45,7 @@ class ClientManagerTest extends TestCase
     {
         $expected = new MockClient();
 
-        $target = new ClientManager(new MockClient());
+        $target = new HttpClientManager(new MockClient());
         $target->add('hello', $expected);
 
         $this->assertSame($expected, $target->driver('hello'));
@@ -58,7 +58,7 @@ class ClientManagerTest extends TestCase
     {
         $this->expectException(OutOfRangeException::class);
 
-        $target = new ClientManager(new MockClient());
+        $target = new HttpClientManager(new MockClient());
 
         $target->driver('not-found');
     }
@@ -73,7 +73,7 @@ class ClientManagerTest extends TestCase
         $client = new MockClient();
         $client->appendResponse($expected);
 
-        $target = new ClientManager($client);
+        $target = new HttpClientManager($client);
 
         $this->assertSame($expected, $target->sendRequest(new Request()));
     }

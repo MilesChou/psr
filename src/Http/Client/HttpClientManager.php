@@ -2,14 +2,27 @@
 
 namespace MilesChou\Psr\Http\Client;
 
+use MilesChou\Psr\Http\Message\Concerns\RequestFactory;
+use MilesChou\Psr\Http\Message\Concerns\ResponseFactory;
+use MilesChou\Psr\Http\Message\Concerns\ServerRequestFactory;
+use MilesChou\Psr\Http\Message\Concerns\StreamFactory;
+use MilesChou\Psr\Http\Message\Concerns\UploadedFileFactory;
+use MilesChou\Psr\Http\Message\Concerns\UriFactory;
 use OutOfRangeException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class ClientManager implements ClientInterface
+class HttpClientManager implements HttpClientInterface
 {
+    use RequestFactory;
+    use ResponseFactory;
+    use ServerRequestFactory;
+    use StreamFactory;
+    use UploadedFileFactory;
+    use UriFactory;
+
     /**
      * @var ClientInterface
      */
@@ -25,7 +38,7 @@ class ClientManager implements ClientInterface
      */
     public function __construct(ClientInterface $default)
     {
-        $this->default = $default;
+        $this->setDefault($default);
     }
 
     /**

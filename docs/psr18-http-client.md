@@ -7,9 +7,9 @@ Use case: when many client will be managed, e.g. different proxy config or diffe
 Create manager with default client.
 
 ```php
-use MilesChou\Psr\Http\Client\ClientManager;
+use MilesChou\Psr\Http\Client\HttpClientManager;
 
-$client = new ClientManager(new Psr18Client());
+$client = new HttpClientManager(new Psr18Client());
 
 $client->sendRequest(new Psr7Request()); // Use as a PSR-18 client 
 ```
@@ -17,9 +17,9 @@ $client->sendRequest(new Psr7Request()); // Use as a PSR-18 client
 Add driver and call.
 
 ```php
-use MilesChou\Psr\Http\Client\ClientManager;
+use MilesChou\Psr\Http\Client\HttpClientManager;
 
-$client = new ClientManager(new Psr18Client());
+$client = new HttpClientManager(new Psr18Client());
 
 $client->add('foo', new AnotherPsr18Client()); // Register
 
