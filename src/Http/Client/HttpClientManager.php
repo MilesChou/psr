@@ -16,6 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class HttpClientManager implements HttpClientInterface
 {
+    use ClientAwareTrait;
     use RequestFactoryDetector;
     use ResponseFactoryDetector;
     use ServerRequestFactoryDetector;
@@ -24,21 +25,16 @@ class HttpClientManager implements HttpClientInterface
     use UriFactoryDetector;
 
     /**
-     * @var ClientInterface
-     */
-    private $default;
-
-    /**
      * @var array<ClientInterface>
      */
     private $drivers = [];
 
     /**
-     * @param ClientInterface $default
+     * @param ClientInterface $httpClient
      */
-    public function __construct(ClientInterface $default)
+    public function __construct(ClientInterface $httpClient)
     {
-        $this->setDefault($default);
+        $this->setDefault($httpClient);
     }
 
     /**
@@ -59,7 +55,7 @@ class HttpClientManager implements HttpClientInterface
     public function driver(?string $name = null): ClientInterface
     {
         if (null === $name) {
-            return $this->default;
+            return $this->httpClient;
         }
 
         if ($this->has($name)) {
@@ -79,7 +75,7 @@ class HttpClientManager implements HttpClientInterface
     }
 
     /**
-     * Proxy to default driver
+     * Proxy to httpClient driver
      *
      * @param RequestInterface $request
      * @return ResponseInterface
@@ -87,14 +83,16 @@ class HttpClientManager implements HttpClientInterface
      */
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        return $this->default->sendRequest($request);
+        return $this->httpClient->sendRequest($request);
     }
 
     /**
-     * @param ClientInterface $default
+     * Alias to setHttpClient()
+     *
+     * @param ClientInterface $httpClient
      */
-    public function setDefault(ClientInterface $default): void
+    public function setDefault(ClientInterface $httpClient): void
     {
-        $this->default = $default;
+        $this->setHttpClient($httpClient);
     }
 }
