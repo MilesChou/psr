@@ -3,18 +3,13 @@
 namespace MilesChou\Psr\Http\Message\Testing;
 
 use BadMethodCallException;
+use MilesChou\Psr\Http\Message\Traits\RequestProxy;
 use PHPUnit\Framework\Assert as PHPUnit;
 use Psr\Http\Message\RequestInterface;
 
-/**
- * @mixin RequestInterface
- */
-class TestRequest
+class TestRequest implements RequestInterface
 {
-    /**
-     * @var RequestInterface
-     */
-    public $baseRequest;
+    use RequestProxy;
 
     /**
      * Create a new TestRequest from PSR-7 request.
@@ -32,25 +27,7 @@ class TestRequest
      */
     public function __construct($request)
     {
-        $this->baseRequest = $request;
-    }
-
-    /**
-     * Handle dynamic calls into macros or pass missing methods to the base request.
-     *
-     * @param string $method
-     * @param array<mixed> $args
-     * @return mixed
-     */
-    public function __call($method, $args)
-    {
-        if (method_exists($this->baseRequest, $method)) {
-            return $this->baseRequest->{$method}(...$args);
-        }
-
-        $message = sprintf('Call to undefined method %s::%s()', static::class, $method);
-
-        throw new BadMethodCallException($message);
+        $this->request = $request;
     }
 
     /**
@@ -93,7 +70,7 @@ class TestRequest
      */
     public function assertContentType(string $value): self
     {
-        $actual = $this->baseRequest->getHeaderLine('Content-type');
+        $actual = $this->request->getHeaderLine('Content-type');
 
         PHPUnit::assertStringContainsString(
             $value,
@@ -131,7 +108,7 @@ class TestRequest
         );
 
         if ($value !== null) {
-            $actual = $this->baseRequest->getHeaderLine($name);
+            $actual = $this->request->getHeaderLine($name);
 
             PHPUnit::assertSame(
                 $value,
@@ -168,7 +145,7 @@ class TestRequest
      */
     public function assertMethod(string $expected): self
     {
-        $actual = $this->baseRequest->getMethod();
+        $actual = $this->request->getMethod();
 
         PHPUnit::assertSame(
             $expected,
@@ -185,7 +162,7 @@ class TestRequest
      */
     public function assertProtocolVersion(string $expected): self
     {
-        $actual = $this->baseRequest->getProtocolVersion();
+        $actual = $this->request->getProtocolVersion();
 
         PHPUnit::assertSame(
             $expected,
@@ -202,7 +179,7 @@ class TestRequest
      */
     public function assertRequestTarget(string $expected): self
     {
-        $actual = $this->baseRequest->getRequestTarget();
+        $actual = $this->request->getRequestTarget();
 
         PHPUnit::assertSame(
             $expected,
@@ -221,7 +198,7 @@ class TestRequest
      */
     public function assertUri(string $expected): self
     {
-        $actual = (string)$this->baseRequest->getUri();
+        $actual = (string)$this->request->getUri();
 
         PHPUnit::assertSame(
             $expected,
@@ -240,7 +217,7 @@ class TestRequest
      */
     public function assertUriContains(string $expected): self
     {
-        $actual = (string)$this->baseRequest->getUri();
+        $actual = (string)$this->request->getUri();
 
         PHPUnit::assertStringContainsString(
             $expected,
@@ -258,15 +235,6 @@ class TestRequest
      */
     public function getContent(): string
     {
-        return (string)$this->baseRequest->getBody();
-    }
-
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function hasHeader(string $name): bool
-    {
-        return '' !== $this->baseRequest->getHeaderLine($name);
+        return (string)$this->request->getBody();
     }
 }

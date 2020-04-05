@@ -45,16 +45,4 @@ class TestRequestTest extends TestCase
 
         $this->assertSame('GET', $target->getMethod());
     }
-
-    /**
-     * @test
-     */
-    public function shouldThrowExceptionWhenCallUndefinedMethod(): void
-    {
-        $this->expectException(BadMethodCallException::class);
-
-        $target = new TestRequest(new Request());
-
-        $target->undefined();
-    }
 }
