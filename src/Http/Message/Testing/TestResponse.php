@@ -3,18 +3,18 @@
 namespace MilesChou\Psr\Http\Message\Testing;
 
 use BadMethodCallException;
+use MilesChou\Psr\Http\Message\Traits\ResponseProxy;
 use PHPUnit\Framework\Assert as PHPUnit;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * @mixin ResponseInterface
+ * Just like TestResponse in Laravel, but it use on PSR-7 Response
+ *
+ * @see https://github.com/laravel/framework/blob/v7.4.0/src/Illuminate/Testing/TestResponse.php
  */
-class TestResponse
+class TestResponse implements ResponseInterface
 {
-    /**
-     * @var ResponseInterface
-     */
-    public $baseResponse;
+    use ResponseProxy;
 
     /**
      * Create a new TestRequest from PSR-7 request.
@@ -33,7 +33,7 @@ class TestResponse
      */
     public function __construct($response)
     {
-        $this->baseResponse = $response;
+        $this->response = $response;
     }
 
     /**
@@ -46,8 +46,8 @@ class TestResponse
      */
     public function __call($method, $args)
     {
-        if (method_exists($this->baseResponse, $method)) {
-            return $this->baseResponse->{$method}(...$args);
+        if (method_exists($this->response, $method)) {
+            return $this->response->{$method}(...$args);
         }
 
         $message = sprintf('Call to undefined method %s::%s()', static::class, $method);
@@ -62,7 +62,7 @@ class TestResponse
      */
     public function assertSuccessful(): self
     {
-        $actual = $this->baseResponse->getStatusCode();
+        $actual = $this->response->getStatusCode();
 
         PHPUnit::assertTrue(
             $this->isSuccessful(),
@@ -79,7 +79,7 @@ class TestResponse
      */
     public function assertOk(): self
     {
-        $actual = $this->baseResponse->getStatusCode();
+        $actual = $this->response->getStatusCode();
 
         PHPUnit::assertSame(
             200,
@@ -97,7 +97,7 @@ class TestResponse
      */
     public function assertCreated(): self
     {
-        $actual = $this->baseResponse->getStatusCode();
+        $actual = $this->response->getStatusCode();
 
         PHPUnit::assertSame(
             201,
@@ -131,7 +131,7 @@ class TestResponse
      */
     public function assertNotFound(): self
     {
-        $actual = $this->baseResponse->getStatusCode();
+        $actual = $this->response->getStatusCode();
 
         PHPUnit::assertSame(
             404,
@@ -149,7 +149,7 @@ class TestResponse
      */
     public function assertForbidden(): self
     {
-        $actual = $this->baseResponse->getStatusCode();
+        $actual = $this->response->getStatusCode();
 
         PHPUnit::assertSame(
             403,
@@ -187,7 +187,7 @@ class TestResponse
      */
     public function assertStatus($status): self
     {
-        $actual = $this->baseResponse->getStatusCode();
+        $actual = $this->response->getStatusCode();
 
         PHPUnit::assertSame(
             $actual,
@@ -230,7 +230,7 @@ class TestResponse
     {
         PHPUnit::assertStringContainsString(
             $uri,
-            $this->baseResponse->getHeaderLine('Location')
+            $this->response->getHeaderLine('Location')
         );
 
         return $this;
@@ -267,7 +267,7 @@ class TestResponse
         );
 
         if ($value !== null) {
-            $actual = $this->baseResponse->getHeaderLine($name);
+            $actual = $this->response->getHeaderLine($name);
 
             PHPUnit::assertSame(
                 $value,
@@ -304,17 +304,7 @@ class TestResponse
      */
     public function getContent(): string
     {
-        return (string)$this->baseResponse->getBody();
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
-    public function hasHeader(string $name): bool
-    {
-        return '' !== $this->baseResponse->getHeaderLine($name);
+        return (string)$this->response->getBody();
     }
 
     /**
@@ -324,7 +314,7 @@ class TestResponse
      */
     public function isSuccessful(): bool
     {
-        $code = $this->baseResponse->getStatusCode();
+        $code = $this->response->getStatusCode();
 
         return 200 <= $code || 300 > $code;
     }
@@ -336,7 +326,7 @@ class TestResponse
      */
     private function isRedirect(): bool
     {
-        $code = $this->baseResponse->getStatusCode();
+        $code = $this->response->getStatusCode();
 
         return 300 <= $code || 400 > $code;
     }
