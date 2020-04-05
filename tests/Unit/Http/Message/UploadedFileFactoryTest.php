@@ -31,8 +31,11 @@ class UploadedFileFactoryTest extends TestCase
         $target->setUploadedFileFactory(new NyholmFactory());
 
         $this->assertInstanceOf(NyholmFactory::class, $target->uploadedFileFactory());
-        $this->assertInstanceOf(NyholmUploadedFile::class, $target->createUploadedFile(
-            (new NyholmFactory())->createStream()
-        ));
+        $this->assertInstanceOf(
+            NyholmUploadedFile::class,
+            $target->createUploadedFile(
+                (new NyholmFactory())->createStream()
+            )
+        );
     }
 }

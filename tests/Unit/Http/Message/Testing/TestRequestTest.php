@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Http\Message\Testing;
 
-use BadMethodCallException;
 use Laminas\Diactoros\Request;
 use Laminas\Diactoros\StreamFactory;
 use MilesChou\Psr\Http\Message\Testing\TestRequest;

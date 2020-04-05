@@ -2,7 +2,6 @@
 
 namespace MilesChou\Psr\Http\Message\Testing;
 
-use BadMethodCallException;
 use MilesChou\Psr\Http\Message\Traits\RequestProxy;
 use PHPUnit\Framework\Assert as PHPUnit;
 use Psr\Http\Message\RequestInterface;

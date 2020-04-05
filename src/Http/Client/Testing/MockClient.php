@@ -89,8 +89,6 @@ class MockClient implements ClientInterface
         return $this;
     }
 
-
-
     /**
      * @param ResponseInterface|Throwable $item
      * @return $this
