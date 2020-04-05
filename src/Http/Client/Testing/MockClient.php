@@ -2,11 +2,15 @@
 
 namespace MilesChou\Psr\Http\Client\Testing;
 
-use MilesChou\Psr\Http\Message\ResponseFactory;
-use MilesChou\Psr\Http\Message\StreamFactory;
+use MilesChou\Psr\Http\Client\HttpClientInterface;
 use MilesChou\Psr\Http\Message\Testing\TestRequest;
+use MilesChou\Psr\Http\Message\Traits\RequestFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\ResponseFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\ServerRequestFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\StreamFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\UploadedFileFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\UriFactoryDetector;
 use OutOfBoundsException;
-use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -14,8 +18,20 @@ use Psr\Http\Message\StreamFactoryInterface;
 use RuntimeException;
 use Throwable;
 
-class MockClient implements ClientInterface
+/**
+ * MockClient
+ *
+ * Implement HttpClientInterface. It can both mock to ClientInterface and HttpClientInterface.
+ */
+class MockClient implements HttpClientInterface
 {
+    use RequestFactoryDetector;
+    use ResponseFactoryDetector;
+    use ServerRequestFactoryDetector;
+    use StreamFactoryDetector;
+    use UploadedFileFactoryDetector;
+    use UriFactoryDetector;
+
     /**
      * @var array<RequestInterface>
      */
@@ -30,16 +46,6 @@ class MockClient implements ClientInterface
      * @var array<ResponseInterface|Throwable>
      */
     private $queue = [];
-
-    /**
-     * @var ResponseFactoryInterface
-     */
-    private $responseFactory;
-
-    /**
-     * @var StreamFactoryInterface
-     */
-    private $streamFactory;
 
     /**
      * @param ResponseFactoryInterface|null $responseFactory
@@ -66,8 +72,8 @@ class MockClient implements ClientInterface
 
         $this->appendQueueList($queue);
 
-        $this->responseFactory = new ResponseFactory($responseFactory);
-        $this->streamFactory = new StreamFactory($streamFactory);
+        $this->setResponseFactory($responseFactory);
+        $this->setStreamFactory($streamFactory);
     }
 
     /**
@@ -218,8 +224,8 @@ class MockClient implements ClientInterface
      */
     private function buildResponse(string $body = '', int $status = 200, array $headers = []): ResponseInterface
     {
-        $response = $this->responseFactory->createResponse($status)
-            ->withBody($this->streamFactory->createStream($body));
+        $response = $this->responseFactory()->createResponse($status)
+            ->withBody($this->streamFactory()->createStream($body));
 
         foreach ($headers as $key => $header) {
             /** @var ResponseInterface $response */
