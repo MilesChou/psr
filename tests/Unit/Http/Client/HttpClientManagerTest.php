@@ -6,8 +6,8 @@ namespace Tests\Unit\Http\Client;
 
 use Laminas\Diactoros\Request;
 use Laminas\Diactoros\Response;
-use MilesChou\Mocker\Psr18\MockClient;
 use MilesChou\Psr\Http\Client\HttpClientManager;
+use MilesChou\Psr\Http\Client\Testing\MockClient;
 use OutOfRangeException;
 use Tests\TestCase;
 

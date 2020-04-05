@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Http\Message;
 
 use Laminas\Diactoros\Request as LaminasRequest;
-use MilesChou\Mocker\Psr18\MockClient;
+use MilesChou\Psr\Http\Client\Testing\MockClient;
 use MilesChou\Psr\Http\Message\PendingRequest;
 use Tests\TestCase;
 
