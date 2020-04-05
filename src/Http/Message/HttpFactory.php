@@ -6,10 +6,10 @@ namespace MilesChou\Psr\Http\Message;
 
 class HttpFactory implements HttpFactoryInterface
 {
-    use Concerns\RequestFactory;
-    use Concerns\ResponseFactory;
-    use Concerns\ServerRequestFactory;
-    use Concerns\StreamFactory;
-    use Concerns\UploadedFileFactory;
-    use Concerns\UriFactory;
+    use Traits\RequestFactoryDetector;
+    use Traits\ResponseFactoryDetector;
+    use Traits\ServerRequestFactoryDetector;
+    use Traits\StreamFactoryDetector;
+    use Traits\UploadedFileFactoryDetector;
+    use Traits\UriFactoryDetector;
 }

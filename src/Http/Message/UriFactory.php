@@ -8,7 +8,7 @@ use Psr\Http\Message\UriFactoryInterface;
 
 class UriFactory implements UriFactoryInterface
 {
-    use Concerns\UriFactory;
+    use Traits\UriFactoryDetector;
 
     /**
      * @param UriFactoryInterface|null $factory

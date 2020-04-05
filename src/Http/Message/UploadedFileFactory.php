@@ -8,7 +8,7 @@ use Psr\Http\Message\UploadedFileFactoryInterface;
 
 class UploadedFileFactory implements UploadedFileFactoryInterface
 {
-    use Concerns\UploadedFileFactory;
+    use Traits\UploadedFileFactoryDetector;
 
     /**
      * @param UploadedFileFactoryInterface|null $factory

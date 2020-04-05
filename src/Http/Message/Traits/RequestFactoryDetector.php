@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MilesChou\Psr\Http\Message\Concerns;
+namespace MilesChou\Psr\Http\Message\Traits;
 
 use DomainException;
 use Http\Factory\Guzzle\RequestFactory as GuzzleFactory;
@@ -12,7 +12,7 @@ use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 
-trait RequestFactory
+trait RequestFactoryDetector
 {
     /**
      * @var RequestFactoryInterface

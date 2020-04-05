@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MilesChou\Psr\Http\Message\Concerns;
+namespace MilesChou\Psr\Http\Message\Traits;
 
 use DomainException;
 use Http\Factory\Guzzle\UploadedFileFactory as GuzzleFactory;
@@ -13,7 +13,7 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
-trait UploadedFileFactory
+trait UploadedFileFactoryDetector
 {
     /**
      * @var UploadedFileFactoryInterface

@@ -8,7 +8,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 
 class RequestFactory implements RequestFactoryInterface
 {
-    use Concerns\RequestFactory;
+    use Traits\RequestFactoryDetector;
 
     /**
      * @param RequestFactoryInterface|null $factory

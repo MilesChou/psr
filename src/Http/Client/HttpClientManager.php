@@ -2,12 +2,12 @@
 
 namespace MilesChou\Psr\Http\Client;
 
-use MilesChou\Psr\Http\Message\Concerns\RequestFactory;
-use MilesChou\Psr\Http\Message\Concerns\ResponseFactory;
-use MilesChou\Psr\Http\Message\Concerns\ServerRequestFactory;
-use MilesChou\Psr\Http\Message\Concerns\StreamFactory;
-use MilesChou\Psr\Http\Message\Concerns\UploadedFileFactory;
-use MilesChou\Psr\Http\Message\Concerns\UriFactory;
+use MilesChou\Psr\Http\Message\Traits\RequestFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\ResponseFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\ServerRequestFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\StreamFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\UploadedFileFactoryDetector;
+use MilesChou\Psr\Http\Message\Traits\UriFactoryDetector;
 use OutOfRangeException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -16,12 +16,12 @@ use Psr\Http\Message\ResponseInterface;
 
 class HttpClientManager implements HttpClientInterface
 {
-    use RequestFactory;
-    use ResponseFactory;
-    use ServerRequestFactory;
-    use StreamFactory;
-    use UploadedFileFactory;
-    use UriFactory;
+    use RequestFactoryDetector;
+    use ResponseFactoryDetector;
+    use ServerRequestFactoryDetector;
+    use StreamFactoryDetector;
+    use UploadedFileFactoryDetector;
+    use UriFactoryDetector;
 
     /**
      * @var ClientInterface

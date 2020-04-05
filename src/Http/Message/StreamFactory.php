@@ -8,7 +8,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 class StreamFactory implements StreamFactoryInterface
 {
-    use Concerns\StreamFactory;
+    use Traits\StreamFactoryDetector;
 
     /**
      * @param StreamFactoryInterface|null $factory
