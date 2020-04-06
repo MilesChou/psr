@@ -2,6 +2,7 @@
 
 namespace MilesChou\Psr\Http\Client;
 
+use MilesChou\Psr\Http\Message\HttpFactoryInterface;
 use MilesChou\Psr\Http\Message\Traits\RequestFactoryDetector;
 use MilesChou\Psr\Http\Message\Traits\ResponseFactoryDetector;
 use MilesChou\Psr\Http\Message\Traits\ServerRequestFactoryDetector;
@@ -90,9 +91,28 @@ class HttpClientManager implements HttpClientInterface
      * Alias to setHttpClient()
      *
      * @param ClientInterface $httpClient
+     * @return $this
      */
-    public function setDefault(ClientInterface $httpClient): void
+    public function setDefault(ClientInterface $httpClient): self
     {
         $this->setHttpClient($httpClient);
+
+        return $this;
+    }
+
+    /**
+     * @param HttpFactoryInterface $httpFactory
+     * @return $this
+     */
+    public function setHttpFactory(HttpFactoryInterface $httpFactory): self
+    {
+        $this->setRequestFactory($httpFactory);
+        $this->setResponseFactory($httpFactory);
+        $this->setServerRequestFactory($httpFactory);
+        $this->setStreamFactory($httpFactory);
+        $this->setUploadedFileFactory($httpFactory);
+        $this->setUriFactory($httpFactory);
+
+        return $this;
     }
 }
