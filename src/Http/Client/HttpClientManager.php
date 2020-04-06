@@ -20,10 +20,10 @@ class HttpClientManager extends ClientManager implements HttpClientInterface
     use UriFactoryDetector;
 
     /**
-     * @param HttpFactoryInterface $httpFactory
+     * @param HttpFactoryInterface|null $httpFactory
      * @return $this
      */
-    public function setHttpFactory(HttpFactoryInterface $httpFactory): self
+    public function setHttpFactory(?HttpFactoryInterface $httpFactory): self
     {
         $this->setRequestFactory($httpFactory);
         $this->setResponseFactory($httpFactory);
