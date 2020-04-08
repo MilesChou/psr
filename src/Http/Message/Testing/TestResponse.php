@@ -23,7 +23,7 @@ class TestResponse implements ResponseInterface
      *
      * @return TestResponse
      */
-    public static function fromBaseResponse($response): TestResponse
+    public static function fromBaseResponse(ResponseInterface $response): TestResponse
     {
         return new self($response);
     }

@@ -16,7 +16,7 @@ class TestRequest implements RequestInterface
      * @param RequestInterface $request
      * @return TestRequest
      */
-    public static function fromBaseRequest($request): TestRequest
+    public static function fromBaseRequest(RequestInterface $request): TestRequest
     {
         return new self($request);
     }
