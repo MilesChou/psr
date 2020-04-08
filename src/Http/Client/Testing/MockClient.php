@@ -81,7 +81,7 @@ class MockClient implements HttpClientInterface
      */
     public function alwaysReturnEmptyResponse(): self
     {
-        return $this->alwaysReturn($this->buildResponse());
+        return $this->alwaysReturn($this->createResponse());
     }
 
     /**
@@ -224,11 +224,10 @@ class MockClient implements HttpClientInterface
      */
     private function buildResponse(string $body = '', int $status = 200, array $headers = []): ResponseInterface
     {
-        $response = $this->responseFactory()->createResponse($status)
-            ->withBody($this->streamFactory()->createStream($body));
+        $response = $this->createResponse($status)
+            ->withBody($this->createStream($body));
 
         foreach ($headers as $key => $header) {
-            /** @var ResponseInterface $response */
             $response = $response->withHeader($key, $header);
         }
 
