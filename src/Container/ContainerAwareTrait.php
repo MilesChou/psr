@@ -6,6 +6,9 @@ namespace MilesChou\Psr\Container;
 
 use Psr\Container\ContainerInterface;
 
+/**
+ * Basic Implementation of ContainerAwareInterface.
+ */
 trait ContainerAwareTrait
 {
     /**

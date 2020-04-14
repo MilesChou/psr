@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace MilesChou\Psr\Http\Message;
 
+/**
+ * Basic Implementation of HttpFactoryAwareInterface.
+ */
 trait HttpFactoryAwareTrait
 {
     /**

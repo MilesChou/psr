@@ -6,6 +6,9 @@ namespace MilesChou\Psr\Http\Client;
 
 use Psr\Http\Client\ClientInterface;
 
+/**
+ * Basic Implementation of ClientAwareInterface.
+ */
 trait ClientAwareTrait
 {
     /**

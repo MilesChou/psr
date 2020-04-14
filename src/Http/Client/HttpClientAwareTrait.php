@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace MilesChou\Psr\Http\Client;
 
+/**
+ * Basic Implementation of HttpClientAwareInterface.
+ */
 trait HttpClientAwareTrait
 {
     /**
