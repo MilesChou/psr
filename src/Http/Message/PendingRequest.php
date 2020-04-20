@@ -2,7 +2,7 @@
 
 namespace MilesChou\Psr\Http\Message;
 
-use MilesChou\Psr\Http\Client\HttpClientAwareTrait;
+use MilesChou\Psr\Http\Client\ClientAwareTrait;
 use MilesChou\Psr\Http\Message\Traits\RequestProxy;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class PendingRequest implements RequestInterface
 {
-    use HttpClientAwareTrait;
+    use ClientAwareTrait;
     use RequestProxy;
 
     /**
