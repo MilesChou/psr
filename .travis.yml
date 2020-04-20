@@ -11,6 +11,7 @@ php:
 branches:
   only:
     - master
+    - /^v?\d+\.x$/
     - /^v?\d+\.\d+\.\d+$/
 
 install:
