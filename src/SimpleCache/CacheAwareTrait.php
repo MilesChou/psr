@@ -18,7 +18,7 @@ trait CacheAwareTrait
      * Set the cache driver
      *
      * @param CacheInterface|null $cache
-     * @return $this
+     * @return static
      */
     public function setCache(?CacheInterface $cache = null)
     {

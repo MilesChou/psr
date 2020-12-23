@@ -8,6 +8,7 @@ interface HttpClientAwareInterface
 {
     /**
      * @param HttpClientInterface $client
+     * @return static
      */
     public function setHttpClient(HttpClientInterface $client);
 }

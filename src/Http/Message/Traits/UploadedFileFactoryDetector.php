@@ -76,10 +76,10 @@ trait UploadedFileFactoryDetector
     }
 
     /**
-     * @param UploadedFileFactoryInterface $uploadedFileFactory
-     * @return $this
+     * @param UploadedFileFactoryInterface|null $uploadedFileFactory
+     * @return static
      */
-    public function setUploadedFileFactory(?UploadedFileFactoryInterface $uploadedFileFactory): self
+    public function setUploadedFileFactory(?UploadedFileFactoryInterface $uploadedFileFactory)
     {
         $this->uploadedFileFactory = $uploadedFileFactory;
         return $this;

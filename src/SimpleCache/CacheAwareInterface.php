@@ -13,6 +13,7 @@ interface CacheAwareInterface
      * Set the cache driver
      *
      * @param CacheInterface $cache
+     * @return static
      */
     public function setCache(CacheInterface $cache);
 }

@@ -16,9 +16,9 @@ trait HttpClientAwareTrait
 
     /**
      * @param HttpClientInterface $httpClient
-     * @return $this
+     * @return static
      */
-    public function setHttpClient(HttpClientInterface $httpClient): self
+    public function setHttpClient(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
         return $this;

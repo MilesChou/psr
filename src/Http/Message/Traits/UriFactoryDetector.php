@@ -64,10 +64,10 @@ trait UriFactoryDetector
     }
 
     /**
-     * @param UriFactoryInterface $uriFactory
-     * @return $this
+     * @param UriFactoryInterface|null $uriFactory
+     * @return static
      */
-    public function setUriFactory(?UriFactoryInterface $uriFactory): self
+    public function setUriFactory(?UriFactoryInterface $uriFactory)
     {
         $this->uriFactory = $uriFactory;
         return $this;

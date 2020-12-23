@@ -10,6 +10,7 @@ interface ClientAwareInterface
 {
     /**
      * @param ClientInterface $client
+     * @return static
      */
     public function setHttpClient(ClientInterface $client);
 }

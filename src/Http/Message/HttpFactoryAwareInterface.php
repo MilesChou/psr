@@ -8,6 +8,7 @@ interface HttpFactoryAwareInterface
 {
     /**
      * @param HttpFactoryInterface $httpFactory
+     * @return static
      */
     public function setHttpFactory(HttpFactoryInterface $httpFactory);
 }

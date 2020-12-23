@@ -72,10 +72,10 @@ trait ServerRequestFactoryDetector
     }
 
     /**
-     * @param ServerRequestFactoryInterface $serverRequestFactory
-     * @return $this
+     * @param ServerRequestFactoryInterface|null $serverRequestFactory
+     * @return static
      */
-    public function setServerRequestFactory(?ServerRequestFactoryInterface $serverRequestFactory): self
+    public function setServerRequestFactory(?ServerRequestFactoryInterface $serverRequestFactory)
     {
         $this->serverRequestFactory = $serverRequestFactory;
         return $this;

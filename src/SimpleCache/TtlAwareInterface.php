@@ -20,6 +20,7 @@ interface TtlAwareInterface
      * Set the cache TTL
      *
      * @param null|int|DateInterval $ttl Unit is Second
+     * @return static
      */
     public function setTtl($ttl);
 }

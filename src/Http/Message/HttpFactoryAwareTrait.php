@@ -16,9 +16,9 @@ trait HttpFactoryAwareTrait
 
     /**
      * @param HttpFactoryInterface $httpFactory
-     * @return $this
+     * @return static
      */
-    public function setHttpFactory(HttpFactoryInterface $httpFactory): self
+    public function setHttpFactory(HttpFactoryInterface $httpFactory)
     {
         $this->httpFactory = $httpFactory;
         return $this;

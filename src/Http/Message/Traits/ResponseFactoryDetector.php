@@ -64,10 +64,10 @@ trait ResponseFactoryDetector
     }
 
     /**
-     * @param ResponseFactoryInterface $responseFactory
-     * @return $this
+     * @param ResponseFactoryInterface|null $responseFactory
+     * @return static
      */
-    public function setResponseFactory(?ResponseFactoryInterface $responseFactory): self
+    public function setResponseFactory(?ResponseFactoryInterface $responseFactory)
     {
         $this->responseFactory = $responseFactory;
         return $this;

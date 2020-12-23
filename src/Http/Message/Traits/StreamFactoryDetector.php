@@ -88,10 +88,10 @@ trait StreamFactoryDetector
     }
 
     /**
-     * @param StreamFactoryInterface $streamFactory
-     * @return $this
+     * @param StreamFactoryInterface|null $streamFactory
+     * @return static
      */
-    public function setStreamFactory(?StreamFactoryInterface $streamFactory): self
+    public function setStreamFactory(?StreamFactoryInterface $streamFactory)
     {
         $this->streamFactory = $streamFactory;
         return $this;
