@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MilesChou\Psr\Http\Message\Traits;
 
 use DomainException;
-use Http\Factory\Guzzle\RequestFactory as GuzzleFactory;
+use GuzzleHttp\Psr7\HttpFactory as GuzzleFactory;
 use Http\Factory\Slim\RequestFactory as SlimFactory;
 use Laminas\Diactoros\RequestFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
