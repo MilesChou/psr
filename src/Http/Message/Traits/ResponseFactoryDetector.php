@@ -6,6 +6,7 @@ namespace MilesChou\Psr\Http\Message\Traits;
 
 use DomainException;
 use GuzzleHttp\Psr7\HttpFactory as GuzzleFactory;
+use Http\Factory\Guzzle\ResponseFactory as LegacyGuzzleFactory;
 use Http\Factory\Slim\ResponseFactory as SlimFactory;
 use Laminas\Diactoros\ResponseFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
@@ -38,6 +39,10 @@ trait ResponseFactoryDetector
 
         if (class_exists(SlimFactory::class)) {
             return new SlimFactory();
+        }
+
+        if (class_exists(LegacyGuzzleFactory::class)) {
+            return new LegacyGuzzleFactory();
         }
 
         throw new DomainException('ResponseFactory driver is not found');
