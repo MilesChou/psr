@@ -6,6 +6,7 @@ namespace MilesChou\Psr\Http\Message\Traits;
 
 use DomainException;
 use GuzzleHttp\Psr7\HttpFactory as GuzzleFactory;
+use Http\Factory\Guzzle\UploadedFileFactory as LegacyGuzzleFactory;
 use Http\Factory\Slim\UploadedFileFactory as SlimFactory;
 use Laminas\Diactoros\UploadedFileFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
@@ -39,6 +40,10 @@ trait UploadedFileFactoryDetector
 
         if (class_exists(SlimFactory::class)) {
             return new SlimFactory();
+        }
+
+        if (class_exists(LegacyGuzzleFactory::class)) {
+            return new LegacyGuzzleFactory();
         }
 
         throw new DomainException('UploadedFileFactory driver is not found');

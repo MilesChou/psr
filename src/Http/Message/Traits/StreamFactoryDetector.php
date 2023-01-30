@@ -6,6 +6,7 @@ namespace MilesChou\Psr\Http\Message\Traits;
 
 use DomainException;
 use GuzzleHttp\Psr7\HttpFactory as GuzzleFactory;
+use Http\Factory\Guzzle\StreamFactory as LegacyGuzzleFactory;
 use Http\Factory\Slim\StreamFactory as SlimFactory;
 use Laminas\Diactoros\StreamFactory as LaminasFactory;
 use Nyholm\Psr7\Factory\Psr17Factory as NyholmFactory;
@@ -38,6 +39,10 @@ trait StreamFactoryDetector
 
         if (class_exists(SlimFactory::class)) {
             return new SlimFactory();
+        }
+
+        if (class_exists(LegacyGuzzleFactory::class)) {
+            return new LegacyGuzzleFactory();
         }
 
         throw new DomainException('StreamFactory driver is not found');
