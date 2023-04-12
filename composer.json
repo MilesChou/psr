@@ -24,8 +24,8 @@
         "psr/simple-cache": "^1.0 | ^2.0 | ^3.0"
     },
     "suggest": {
-        "guzzlehttp/psr7": "Require ^2",
-        "laminas/laminas-diactoros": "Require ^2 if need use PSR-17 HTTP factory"
+        "guzzlehttp/guzzle": "Require ^7 if need use PSR-18",
+        "guzzlehttp/psr7": "Require ^2 if need use PSR-7 and PSR-17"
     },
     "require-dev": {
         "ext-json": "*",
@@ -35,7 +35,7 @@
         "laminas/laminas-diactoros": "^2.0",
         "nyholm/psr7": "^1.0",
         "phpunit/phpunit": "^7.5 | ^8 | ^9",
-        "squizlabs/php_codesniffer": "^3.5"
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
