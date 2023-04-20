@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - 1.x
+      - 2.x
 
 jobs:
   linux_tests:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [ 8.2, 8.1, 8.0, 7.4, 7.3, 7.2, 7.1 ]
+        php: [ 8.2, 8.1, 8.0]
         stability: [ prefer-lowest, prefer-stable ]
 
     name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
@@ -35,14 +35,6 @@ jobs:
           timeout_minutes: 5
           max_attempts: 5
           command: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
-
-      - name: Install dependencies for PHP 8.0+
-        if: "matrix.php > 8.0"
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 5
-          max_attempts: 5
-          command: composer update --prefer-dist --no-interaction --no-progress phpunit/phpunit
 
       - name: Execute phpcs
         run: php vendor/bin/phpcs
