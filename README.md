@@ -9,6 +9,11 @@
 
 The support library for PSR.
 
+## Support Version
+
+* 1.x supports more PHP versions.
+* 2.x supports newer PSR versions.
+
 ## Usage
 
 * [PSR-7 HTTP Message](docs/psr7-http-message.md)

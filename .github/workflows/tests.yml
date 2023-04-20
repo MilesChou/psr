@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - master
+      - 1.x
 
 jobs:
   linux_tests:
@@ -27,7 +27,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           tools: composer:v2
-          coverage: none
+          coverage: xdebug
 
       - name: Install dependencies
         uses: nick-invision/retry@v2
