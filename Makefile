@@ -2,12 +2,10 @@
 
 PROCESSORS_NUM := $(shell getconf _NPROCESSORS_ONLN)
 
-.PHONY: all clean clean-all check test coverage
-
-# ---------------------------------------------------------------------
+# --------------------------------------------------------------------
 
 .PHONE: all
-all: test
+all: phpcs test
 
 .PHONE: clean
 clean:
@@ -18,12 +16,12 @@ clean-all: clean
 	rm -rf ./vendor
 	rm -rf ./composer.lock
 
-.PHONY: check
-check:
+.PHONY: phpcs
+phpcs:
 	php vendor/bin/phpcs --parallel=${PROCESSORS_NUM}
 
 .PHONY: test
-test: check
+test:
 	php vendor/bin/phpunit
 
 .PHONY: coverage
